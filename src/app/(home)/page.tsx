@@ -1,3 +1,9 @@
+import { CharacterSelection } from "./character-selection/character-selection";
+
 export default function Home() {
-  return <div></div>;
+  return (
+    <>
+      <CharacterSelection />
+    </>
+  );
 }

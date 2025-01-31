@@ -5,8 +5,8 @@ export const ThemeToggle = () => {
     <label className="swap swap-rotate">
       {/* this hidden checkbox controls the state */}
       <input type="checkbox" className="theme-controller" value="strabo-dark" />
-      <SunIcon className="h-10 w-10 swap-off" />
-      <MoonIcon className="h-10 w-10 swap-on" />
+      <SunIcon className="h-6 w-6 swap-off" />
+      <MoonIcon className="h-6 w-6 swap-on" />
     </label>
   );
 };

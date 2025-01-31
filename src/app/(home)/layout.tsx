@@ -1,16 +1,14 @@
-import { AppNavbar } from "@/components/ui/navbar";
+import { SidebarContent } from "@/components/ui/sidebar-content";
+import { HomeFooter } from "@/presentation/home/home.footer";
 
 interface BaseLayout {
   children: React.ReactNode;
 }
 const HomeLayout: React.FC<BaseLayout> = ({ children }) => {
   return (
-    <section>
-      <header>
-        <AppNavbar />
-      </header>
-      <main>{children}</main>
-      <footer></footer>
+    <section className="h-full flex flex-col">
+      <SidebarContent>{children}</SidebarContent>
+      <HomeFooter />
     </section>
   );
 };

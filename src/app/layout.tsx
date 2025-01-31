@@ -1,15 +1,27 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Cinzel_Decorative,
+  IM_Fell_English,
+  EB_Garamond,
+} from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const cinzelDecorative = Cinzel_Decorative({
+  variable: "--font-cinzel-decorative",
   subsets: ["latin"],
+  weight: "700",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const ebGaramond = EB_Garamond({
+  variable: "--font-eb-garamond",
   subsets: ["latin"],
+  weight: ["400", "600"],
+});
+
+const imFellEnglish = IM_Fell_English({
+  variable: "--font-im-fell-english",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -23,8 +35,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className="h-full">
+      <body
+        className={`${imFellEnglish.variable} ${cinzelDecorative.variable} ${ebGaramond.variable} h-full`}
+      >
         {children}
       </body>
     </html>
