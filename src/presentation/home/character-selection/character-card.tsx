@@ -18,7 +18,8 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({ data }) => {
   return (
     <div
       rel="button"
-      className="group my-2 cursor-pointer"
+      className="group my-2 cursor-pointer transition-transform duration-500"
+      //TODO: Remove custom properties later
       style={
         {
           "--char-color": `var(--color-${character.color})`,
@@ -27,16 +28,16 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({ data }) => {
       }
     >
       <div
-        className={`card bg-gradient-to-br from-base-100 to-primary w-80 rounded-sm shadow-primary ring-0 transition-all shadow-sm group-hover:shadow-lg  group-hover:shadow-(color:--char-color) p-1`}
+        className={`card bg-gradient-to-br from-base-100 to-primary w-80 rounded-sm shadow-primary ring-0 transition-shadow duration-500 shadow-sm group-hover:shadow-lg  group-hover:shadow-primary p-1`}
       >
         <figure className="overflow-hidden relative rounded-sm">
           <div
-            className={`h-full w-full absolute z-10 group-hover:inset-shadow-sm transition-all group-hover:inset-shadow-(color:--char-color)`}
+            className={`h-full w-full absolute z-10 group-hover:inset-shadow-sm transition-all group-hover:inset-shadow-primary`}
           >
             <div className="flex justify-center items-end h-full">
               <div className="bg-gradient-to-br from-base-100 to-primary px-5 rounded-t-xs transition-all">
                 <h2 className="card-title text-base-content transition-all justify-center font-elements text-xl">
-                  {character.full_name}
+                  {character.fullName}
                 </h2>
               </div>
             </div>
@@ -46,7 +47,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({ data }) => {
             height={320}
             width={320}
             src={getCharacterImage(character.id)}
-            alt={character.full_name}
+            alt={character.fullName}
           />
         </figure>
       </div>

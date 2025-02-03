@@ -11,8 +11,8 @@
   --color-base-200: #d5c3ad;
   --color-base-300: #b8ac9b;
   --color-base-content: #3d342f;
-  --color-primary: #0f3957;
-  --color-primary-content: #e9e3d8;
+  --color-warning: #0f3957;
+  --color-warning-content: #e9e3d8;
   --color-secondary: #75443b;
   --color-secondary-content: #e9e3d8;
   --color-accent: #ca855f;
@@ -23,8 +23,8 @@
   --color-info-content: #e9e3d8;
   --color-success: oklch(51% 0.096 186.391);
   --color-success-content: #e9e3d8;
-  --color-warning: #ebba70;
-  --color-warning-content: #3d342f;
+  --color-primary: #ebba70;
+  --color-primary-content: #3d342f;
   --color-error: #a05846;
   --color-error-content: #e9e3d8;
   --radius-selector: 0.2rem;
@@ -48,7 +48,7 @@
     135deg,
     var(--color-base-100),
     var(--color-base-200) 66%,
-    var(--color-warning)
+    var(--color-primary)
   );
   -webkit-background-clip: text;
   background-clip: text;

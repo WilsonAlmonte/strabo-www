@@ -9,7 +9,7 @@ export const HomeHero = ({ children }: { children: React.ReactNode }) => {
     >
       {children}
       <div className="col-start-1 row-start-1 h-full w-full absolute bg-neutral/50"></div>
-      <div className="hero-content text-neutral-content text-center flex-1">
+      <div className="hero-content text-neutral-content text-center flex-1 items-start pt-40">
         <div className="max-w-2xl z-20">
           <div className="font-display text-center">
             <h1 className="mb-5 text-6xl font-bold">
