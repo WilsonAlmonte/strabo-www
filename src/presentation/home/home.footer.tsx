@@ -5,7 +5,7 @@ export const HomeFooter = () => {
     <footer className="footer footer-horizontal bg-primary/60 items-center p-4">
       <aside className="grid-flow-col items-center">
         <SwordsIcon width={36} height={36} />
-        <p className="font-display text-xl">AI-Strabo</p>
+        <p className="font-display text-xl">Strabo</p>
 
         <p className="font-body">
           © {new Date().getFullYear()} - All right reserved

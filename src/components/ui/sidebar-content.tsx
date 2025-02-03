@@ -1,4 +1,5 @@
 import { HomeHero } from "@/presentation/home/home.hero";
+import Image from "next/image";
 
 interface AppNavbarProps {
   children: React.ReactNode;
@@ -17,7 +18,8 @@ export const SidebarContent: React.FC<AppNavbarProps> = ({ children }) => {
         {/* Navbar */}
         <HomeHero>
           <nav className="navbar backdrop-blur-2xl w-full z-10 ">
-            <div className="mx-2 px-2 text-3xl flex-1 font-display text-base-100 ">
+            <div className="mx-2 px-2 text-3xl flex-1 font-display text-base-100 flex items-center gap-2">
+              <Image src="/logo.png" width={40} height={40} alt="logo" />
               STRABO
             </div>
           </nav>
