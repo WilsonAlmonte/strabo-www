@@ -1,3 +1,5 @@
+import { StoryPremise } from "./premise.interface";
+
 export interface StoryCharacterData {
   id: string;
   full_name: string;
@@ -6,6 +8,7 @@ export interface StoryCharacterData {
   backstory: string;
   special_ability: string;
   color: string;
+  premises: StoryPremise[];
 }
 
 export class StoryCharacterCard {
