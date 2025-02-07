@@ -1,6 +1,6 @@
 import { StoryBranch } from "@/core/branch.interface";
 import { StoryCharacterData } from "@/core/character.interface";
-import { StoryPremise } from "@/core/initial-setting.interface";
+import { StoryPremise } from "@/core/premise.interface";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
