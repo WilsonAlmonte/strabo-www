@@ -3,8 +3,8 @@ import { useGameFlowStore } from "@/context/game-flow.store";
 import { useShallow } from "zustand/react/shallow";
 import { CharacterSelectionWrapper } from "./character-selection-wrapper";
 import { CharacterSelectionCardGroup } from "./character-selection.card-group";
-import { SelectedCharactarDetails } from "./selected-character-details";
 import { AnimatePresence, motion } from "motion/react";
+import { CharacterSelectedGameDetails } from "./character-selected-game-details";
 
 export const CharacterSelection = () => {
   const {
@@ -66,7 +66,7 @@ export const CharacterSelection = () => {
                 ease: [0, 0.71, 0.2, 1.01],
               }}
             >
-              <SelectedCharactarDetails
+              <CharacterSelectedGameDetails
                 resetGame={resetGame}
                 confirmChoice={confirmChoice}
                 selectedPremise={selectedPremise}
