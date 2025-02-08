@@ -11,14 +11,7 @@ export const CharacterSelectionCardGroup: React.FC<
   CharacterSelectionCardGroupProps
 > = ({ avaliableCharacters, onCharacterSelected }) => {
   return (
-    <motion.div
-      key={"available-characters-10"}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      layout
-      className={"flex gap-10 justify-center flex-wrap"}
-    >
+    <>
       {avaliableCharacters.map((character, index) => (
         <motion.div
           key={character.id}
@@ -37,6 +30,6 @@ export const CharacterSelectionCardGroup: React.FC<
           />
         </motion.div>
       ))}
-    </motion.div>
+    </>
   );
 };
