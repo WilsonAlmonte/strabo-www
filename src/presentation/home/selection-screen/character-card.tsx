@@ -85,7 +85,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
   });
 
   const flipCard = async () => {
-    if (selectedSound.state() === "loaded") selectedSound.play();
+    selectedSound.play();
     await animate(scope.current, { y: 50 }, { duration: 0.4 });
     await animate([...cardFlipAnimation], {
       repeat: 2,
@@ -98,11 +98,11 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
   useEffect(() => {
     if (scope.current) {
       hover(scope.current, () => {
-        animate([...showBackAnimation], {});
-        if (hoverSound.state() === "loaded") hoverSound.play();
+        animate([...showBackAnimation], {}).then(() => {
+          hoverSound.play();
+        });
         return async () => {
           await animate([...showFront], {});
-          hoverSound.stop();
         };
       });
     }
