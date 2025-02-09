@@ -2,7 +2,6 @@
 //TODO: sound need refactor
 import { useGameFlowStore } from "@/context/game-flow.store";
 import { CharacterSelection } from "@/presentation/home/selection-screen/character-selection";
-import { characters } from "@/data/characters.fixture";
 import { Howl } from "howler";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
@@ -42,22 +41,16 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [soundOn]);
 
-  const { storyTree, setAvailableStoryCharacters } = useGameFlowStore(
+  const { storyTree, availableStoryCharacters } = useGameFlowStore(
     useShallow((state) => ({
       storyTree: state.storyTree,
-      setAvailableStoryCharacters: state.setAvailableStoryCharacters,
+      availableStoryCharacters: state.availableStoryCharacters,
     }))
   );
 
-  useEffect(() => {
-    setAvailableStoryCharacters(characters);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <AnimatePresence>
-      {storyTree.length === 0 && (
+      {availableStoryCharacters.length > 0 && storyTree.length === 0 && (
         <motion.div
           key={"selection-root"}
           exit={{

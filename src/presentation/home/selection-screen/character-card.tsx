@@ -114,9 +114,6 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
   }));
 
   const character = new StoryCharacterCard(data);
-  const getCharacterImage = (id: string) => {
-    return `/characters/${id}.webp`;
-  };
 
   const handleCardClick = () => {
     if (characterSelected) {
@@ -185,7 +182,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
                 className="max-h-80 max-w-80 object-cover"
                 height={320}
                 width={320}
-                src={getCharacterImage(character.id)}
+                src={character.avatarUrl}
                 alt={character.fullName}
               />
             </figure>

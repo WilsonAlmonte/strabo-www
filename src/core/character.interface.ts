@@ -9,6 +9,7 @@ export interface StoryCharacterData {
   special_ability: string;
   color: string;
   premises: StoryPremise[];
+  avatarUrl: string;
 }
 
 export class StoryCharacterCard {
@@ -19,6 +20,7 @@ export class StoryCharacterCard {
   backstory: string;
   specialAbility: string;
   color: string;
+  avatarUrl: string;
 
   constructor(data: StoryCharacterData) {
     this.id = data.id;
@@ -28,5 +30,6 @@ export class StoryCharacterCard {
     this.backstory = data.backstory;
     this.specialAbility = data.special_ability;
     this.color = data.color;
+    this.avatarUrl = data.avatarUrl;
   }
 }
