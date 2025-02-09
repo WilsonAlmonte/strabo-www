@@ -1,16 +1,12 @@
-import { SidebarContent } from "@/components/ui/sidebar-content";
-import { HomeFooter } from "@/presentation/home/home.footer";
+import { HomeLayout } from "@/components/ui/home.layout";
 
 interface BaseLayout {
   children: React.ReactNode;
 }
-const HomeLayout: React.FC<BaseLayout> = ({ children }) => {
+export default function Layout({ children }: BaseLayout) {
   return (
     <section className="h-full flex flex-col">
-      <SidebarContent>{children}</SidebarContent>
-      <HomeFooter />
+      <HomeLayout>{children}</HomeLayout>
     </section>
   );
-};
-
-export default HomeLayout;
+}
