@@ -9,6 +9,7 @@ import Image from "next/image";
 const imageList = [bgYellow, bgRed, bgDark, bgRuins];
 export const HomeHero = ({ onStartClick }: { onStartClick: () => void }) => {
   const [selectedImage, setSelectedImage] = useState(imageList[0]);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [isFistLoad, setIsFirstLoad] = useState(true);
   const [transitionX, setTransitionX] = useState(500);
   const prevSlide = () => {
@@ -18,6 +19,7 @@ export const HomeHero = ({ onStartClick }: { onStartClick: () => void }) => {
       currentIndex === 0 ? imageList.length - 1 : currentIndex - 1;
     setSelectedImage(imageList[nextIndex]);
     if (isFistLoad) setIsFirstLoad(false);
+    setIsLoaded(false);
   };
   const nextSlide = () => {
     setTransitionX(500);
@@ -26,6 +28,7 @@ export const HomeHero = ({ onStartClick }: { onStartClick: () => void }) => {
       currentIndex === imageList.length - 1 ? 0 : currentIndex + 1;
     setSelectedImage(imageList[nextIndex]);
     if (isFistLoad) setIsFirstLoad(false);
+    setIsLoaded(false);
   };
   return (
     <div
@@ -39,7 +42,11 @@ export const HomeHero = ({ onStartClick }: { onStartClick: () => void }) => {
         <motion.div
           className="min-h-screen absolute inset-0 z-0 "
           initial={{ opacity: 0, x: isFistLoad ? 0 : -transitionX }}
-          animate={{ opacity: 1, x: 0, transition: { duration: 0.5 } }}
+          animate={{
+            opacity: isLoaded ? 1 : 0,
+            x: 0,
+            transition: { duration: 0.5 },
+          }}
           key={selectedImage.src}
           exit={{ x: transitionX, opacity: 0, transition: { duration: 0.5 } }}
         >
@@ -47,8 +54,9 @@ export const HomeHero = ({ onStartClick }: { onStartClick: () => void }) => {
             priority
             alt="Background"
             src={selectedImage}
-            placeholder="blur"
+            placeholder="empty"
             fill
+            onLoad={() => setIsLoaded(true)}
             sizes="100vw"
             style={{
               objectFit: "cover",
