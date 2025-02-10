@@ -33,7 +33,7 @@ export const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
     <div className="flex-1 relative">
       <div className=" w-full absolute h-full opacity-15">
         <video autoPlay loop muted className="h-full w-full object-fill">
-          <source src="/bk/bk-video.mp4" type="video/mp4" />
+          <source src="/bg-video.mp4" type="video/mp4" />
         </video>
       </div>
       <div

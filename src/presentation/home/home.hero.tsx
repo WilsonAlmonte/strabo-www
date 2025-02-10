@@ -1,43 +1,61 @@
-"use client";
-
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
-import { motion } from "motion/react";
+import bgYellow from "@/assets/bk/yellow.jpg";
+import bgRed from "@/assets/bk/red.jpg";
+import bgDark from "@/assets/bk/dark.jpg";
+import bgRuins from "@/assets/bk/ruins.png";
+import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
-const imageList = [
-  "/bk/red.jpg",
-  "/bk/dark.jpg",
-  "/bk/ruins.png",
-  "/bk/yellow.jpg",
-];
+import Image from "next/image";
+const imageList = [bgYellow, bgRed, bgDark, bgRuins];
 export const HomeHero = ({ onStartClick }: { onStartClick: () => void }) => {
-  const initialImage = imageList[0];
-  const [selectedImage, setSelectedImage] = useState(initialImage);
+  const [selectedImage, setSelectedImage] = useState(imageList[0]);
+  const [isFistLoad, setIsFirstLoad] = useState(true);
+  const [transitionX, setTransitionX] = useState(500);
   const prevSlide = () => {
+    setTransitionX(-500);
     const currentIndex = imageList.indexOf(selectedImage);
     const nextIndex =
       currentIndex === 0 ? imageList.length - 1 : currentIndex - 1;
     setSelectedImage(imageList[nextIndex]);
+    if (isFistLoad) setIsFirstLoad(false);
   };
   const nextSlide = () => {
+    setTransitionX(500);
     const currentIndex = imageList.indexOf(selectedImage);
     const nextIndex =
       currentIndex === imageList.length - 1 ? 0 : currentIndex + 1;
     setSelectedImage(imageList[nextIndex]);
+    if (isFistLoad) setIsFirstLoad(false);
   };
   return (
-    <motion.div
-      initial={{
-        backgroundImage: `url(${imageList[0]})`,
-      }}
-      animate={{
-        backgroundImage: `url(${selectedImage})`,
-      }}
-      className="hero min-h-screen bg-center bg-cover flex flex-col relative transition-all duration-500"
+    <div
+      className="hero min-h-screen flex flex-col relative transition-all duration-500 overflow-x-hidden"
       style={{
         maskImage:
           "linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 80%, transparent 100%)",
       }}
     >
+      <AnimatePresence>
+        <motion.div
+          className="min-h-screen absolute inset-0 z-0 "
+          initial={{ opacity: 0, x: isFistLoad ? 0 : -transitionX }}
+          animate={{ opacity: 1, x: 0, transition: { duration: 0.5 } }}
+          key={selectedImage.src}
+          exit={{ x: transitionX, opacity: 0, transition: { duration: 0.5 } }}
+        >
+          <Image
+            priority
+            alt="Background"
+            src={selectedImage}
+            placeholder="blur"
+            fill
+            sizes="100vw"
+            style={{
+              objectFit: "cover",
+            }}
+          />
+        </motion.div>
+      </AnimatePresence>
       <nav className="navbar backdrop-blur-2xl w-full z-10 ">
         <div className="mx-2 px-2 text-3xl flex-1 font-display text-base-100 flex items-center gap-2">
           STRABO
@@ -73,6 +91,6 @@ export const HomeHero = ({ onStartClick }: { onStartClick: () => void }) => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
