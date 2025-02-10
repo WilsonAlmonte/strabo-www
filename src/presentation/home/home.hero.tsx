@@ -3,32 +3,30 @@ import bgYellow from "@/assets/bk/yellow.jpg";
 import bgRed from "@/assets/bk/red.jpg";
 import bgDark from "@/assets/bk/dark.jpg";
 import bgRuins from "@/assets/bk/ruins.png";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import { useState } from "react";
 import Image from "next/image";
 const imageList = [bgYellow, bgRed, bgDark, bgRuins];
 export const HomeHero = ({ onStartClick }: { onStartClick: () => void }) => {
   const [selectedImage, setSelectedImage] = useState(imageList[0]);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [isFistLoad, setIsFirstLoad] = useState(true);
-  const [transitionX, setTransitionX] = useState(500);
+  const [loadedImages, setLoadedImages] = useState<string[]>([]);
+
   const prevSlide = () => {
-    setTransitionX(-500);
     const currentIndex = imageList.indexOf(selectedImage);
     const nextIndex =
       currentIndex === 0 ? imageList.length - 1 : currentIndex - 1;
     setSelectedImage(imageList[nextIndex]);
-    if (isFistLoad) setIsFirstLoad(false);
-    setIsLoaded(false);
   };
+
+  const imageLoaded = (image: string) => {
+    setLoadedImages([...loadedImages, image]);
+  };
+
   const nextSlide = () => {
-    setTransitionX(500);
     const currentIndex = imageList.indexOf(selectedImage);
     const nextIndex =
       currentIndex === imageList.length - 1 ? 0 : currentIndex + 1;
     setSelectedImage(imageList[nextIndex]);
-    if (isFistLoad) setIsFirstLoad(false);
-    setIsLoaded(false);
   };
   return (
     <div
@@ -38,32 +36,36 @@ export const HomeHero = ({ onStartClick }: { onStartClick: () => void }) => {
           "linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 80%, transparent 100%)",
       }}
     >
-      <AnimatePresence>
+      {imageList.map((img) => (
         <motion.div
           className="min-h-screen absolute inset-0 z-0 "
-          initial={{ opacity: 0, x: isFistLoad ? 0 : -transitionX }}
-          animate={{
-            opacity: isLoaded ? 1 : 0,
-            x: 0,
-            transition: { duration: 0.5 },
+          initial={{
+            opacity: 0,
           }}
-          key={selectedImage.src}
-          exit={{ x: transitionX, opacity: 0, transition: { duration: 0.5 } }}
+          animate={{
+            opacity: selectedImage.src === img.src ? 1 : 0,
+            transition: {
+              duration: 0.5,
+              ease: selectedImage.src === img.src ? "circInOut" : "anticipate",
+            },
+          }}
+          key={img.src}
         >
           <Image
             priority
             alt="Background"
-            src={selectedImage}
+            src={img}
             placeholder="empty"
             fill
-            onLoad={() => setIsLoaded(true)}
+            onLoad={() => imageLoaded("yello")}
             sizes="100vw"
             style={{
               objectFit: "cover",
             }}
           />
         </motion.div>
-      </AnimatePresence>
+      ))}
+
       <nav className="navbar backdrop-blur-2xl w-full z-10 ">
         <div className="mx-2 px-2 text-3xl flex-1 font-display text-base-100 flex items-center gap-2">
           STRABO
