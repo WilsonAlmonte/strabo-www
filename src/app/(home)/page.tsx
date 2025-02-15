@@ -1,6 +1,6 @@
 "use client";
 //TODO: sound need refactor
-import { useGameFlowStore } from "@/context/game-flow.store";
+import { useGameFlowStore } from "@/store/game-flow.store";
 import { CharacterSelection } from "@/presentation/home/selection-screen/character-selection";
 import { Howl } from "howler";
 import { useEffect, useState } from "react";
@@ -8,14 +8,13 @@ import { AnimatePresence, motion } from "motion/react";
 import { Volume2Icon, VolumeOffIcon } from "lucide-react";
 import { Gameplay } from "@/presentation/home/gameplay-screen/gameplay";
 import { useShallow } from "zustand/react/shallow";
-
+const sound = new Howl({
+  src: ["/sound/bg-song.mp3"],
+  loop: true,
+  volume: 0.1,
+});
 export default function Home() {
   const [soundOn, setSoundOn] = useState<boolean | null>(null);
-  const sound = new Howl({
-    src: ["/sound/bg-song.mp3"],
-    loop: true,
-    volume: 0.1,
-  });
 
   const changeSoundMode = (mode: boolean) => {
     localStorage.setItem("soundOn", mode.toString());
@@ -38,7 +37,6 @@ export default function Home() {
     return () => {
       sound.stop();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [soundOn]);
 
   const { storyTree, availableStoryCharacters } = useGameFlowStore(

@@ -1,23 +1,27 @@
-"use client";
-
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
+import bgYellow from "@/assets/bk/yellow.jpg";
+import bgRed from "@/assets/bk/red.jpg";
+import bgDark from "@/assets/bk/dark.jpg";
+import bgRuins from "@/assets/bk/ruins.png";
 import { motion } from "motion/react";
 import { useState } from "react";
-const imageList = [
-  "/bk/red.jpg",
-  "/bk/dark.jpg",
-  "/bk/ruins.png",
-  "/bk/yellow.jpg",
-];
+import Image from "next/image";
+const imageList = [bgYellow, bgRed, bgDark, bgRuins];
 export const HomeHero = ({ onStartClick }: { onStartClick: () => void }) => {
-  const initialImage = imageList[0];
-  const [selectedImage, setSelectedImage] = useState(initialImage);
+  const [selectedImage, setSelectedImage] = useState(imageList[0]);
+  const [loadedImages, setLoadedImages] = useState<string[]>([]);
+
   const prevSlide = () => {
     const currentIndex = imageList.indexOf(selectedImage);
     const nextIndex =
       currentIndex === 0 ? imageList.length - 1 : currentIndex - 1;
     setSelectedImage(imageList[nextIndex]);
   };
+
+  const imageLoaded = (image: string) => {
+    setLoadedImages([...loadedImages, image]);
+  };
+
   const nextSlide = () => {
     const currentIndex = imageList.indexOf(selectedImage);
     const nextIndex =
@@ -25,19 +29,43 @@ export const HomeHero = ({ onStartClick }: { onStartClick: () => void }) => {
     setSelectedImage(imageList[nextIndex]);
   };
   return (
-    <motion.div
-      initial={{
-        backgroundImage: `url(${imageList[0]})`,
-      }}
-      animate={{
-        backgroundImage: `url(${selectedImage})`,
-      }}
-      className="hero min-h-screen bg-center bg-cover flex flex-col relative transition-all duration-500"
+    <div
+      className="hero min-h-screen flex flex-col relative transition-all duration-500 overflow-x-hidden"
       style={{
         maskImage:
           "linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 80%, transparent 100%)",
       }}
     >
+      {imageList.map((img) => (
+        <motion.div
+          className="min-h-screen absolute inset-0 z-0 "
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: selectedImage.src === img.src ? 1 : 0,
+            transition: {
+              duration: 0.5,
+              ease: selectedImage.src === img.src ? "circInOut" : "anticipate",
+            },
+          }}
+          key={img.src}
+        >
+          <Image
+            priority
+            alt="Background"
+            src={img}
+            placeholder="empty"
+            fill
+            onLoad={() => imageLoaded("yello")}
+            sizes="100vw"
+            style={{
+              objectFit: "cover",
+            }}
+          />
+        </motion.div>
+      ))}
+
       <nav className="navbar backdrop-blur-2xl w-full z-10 ">
         <div className="mx-2 px-2 text-3xl flex-1 font-display text-base-100 flex items-center gap-2">
           STRABO
@@ -73,6 +101,6 @@ export const HomeHero = ({ onStartClick }: { onStartClick: () => void }) => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };

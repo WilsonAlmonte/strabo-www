@@ -20,7 +20,7 @@ export const ConfirmDetailsModal: React.FC<ConfirmDetailsModalProps> = ({
 }) => {
   return (
     <dialog className="modal modal-bottom sm:modal-middle" ref={dialogRef}>
-      <div className="modal-box bg-(--bk-color)/10 backdrop-blur-xl min-w-3xl font-body p-7">
+      <div className="modal-box bg-(--bg-color)/10 backdrop-blur-xl min-w-3xl font-body p-7">
         <h2 className="text-3xl font-display text-bright">
           {selectedPremise?.title}
         </h2>

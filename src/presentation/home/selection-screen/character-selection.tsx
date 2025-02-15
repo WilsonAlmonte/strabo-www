@@ -1,5 +1,5 @@
 "use client";
-import { useGameFlowStore } from "@/context/game-flow.store";
+import { useGameFlowStore } from "@/store/game-flow.store";
 import { useShallow } from "zustand/react/shallow";
 import { CharacterSelectionWrapper } from "./character-selection-wrapper";
 import { CharacterSelectionCardGroup } from "./character-selection.card-group";
