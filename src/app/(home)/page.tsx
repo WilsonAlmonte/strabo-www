@@ -1,6 +1,6 @@
 "use client";
 //TODO: sound need refactor
-import { useGameFlowStore } from "@/context/game-flow.store";
+import { useGameFlowStore } from "@/store/game-flow.store";
 import { CharacterSelection } from "@/presentation/home/selection-screen/character-selection";
 import { Howl } from "howler";
 import { useEffect, useState } from "react";

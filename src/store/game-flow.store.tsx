@@ -122,23 +122,27 @@ type GameState = {
   finale: string | null;
 };
 
+const initialState = {
+  gameStarted: false,
+  availableStoryCharacters: [],
+  selectedCharacter: null,
+  availablePremises: [],
+  selectedPremise: null,
+  selectedSetup: null,
+  availableChoices: [],
+  currentDepth: 0,
+  storyTree: [],
+  finale: null,
+  maxDepth: 8,
+  loading: false,
+  gameIsOver: false,
+};
+
 export const useGameFlowStore = create<
   GameState & GameFlowActions & GameFlowState
 >()(
   devtools((set) => ({
-    gameStarted: false,
-    availableStoryCharacters: [],
-    selectedCharacter: null,
-    availablePremises: [],
-    selectedPremise: null,
-    selectedSetup: null,
-    availableChoices: [],
-    currentDepth: 0,
-    storyTree: [],
-    finale: null,
-    maxDepth: 8,
-    loading: false,
-    gameIsOver: false,
+    ...initialState,
     startStory: (characterId) => {
       set((state) => {
         const character = state.availableStoryCharacters.find(
@@ -157,17 +161,7 @@ export const useGameFlowStore = create<
     },
     resetGame: () => {
       set(() => ({
-        gameStarted: false,
-        selectedCharacter: null,
-        availablePremises: [],
-        selectedPremise: null,
-        selectedSetup: null,
-        availableChoices: [],
-        currentDepth: 0,
-        storyTree: [],
-        finale: null,
-        maxDepth: 8,
-        gameIsOver: false,
+        ...initialState,
       }));
     },
     setAvailableStoryCharacters: (availableStoryCharacters) => {

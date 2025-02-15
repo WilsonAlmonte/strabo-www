@@ -1,5 +1,5 @@
 "use client";
-import { useGameFlowStore } from "@/context/game-flow.store";
+import { useGameFlowStore } from "@/store/game-flow.store";
 import { characters } from "@/data/characters.fixture";
 import { HomeHero } from "@/presentation/home/home.hero";
 import { useRouter } from "next/navigation";
@@ -39,7 +39,7 @@ export const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
       <div
         style={
           {
-            "--bk-color": `var(--color-${
+            "--bg-color": `var(--color-${
               selectedCharacter?.color
                 ? selectedCharacter.color + "-900"
                 : "neutral"
@@ -52,7 +52,7 @@ export const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
           } as any
         }
-        className="drawer-content flex flex-col h-full from-(--bk-color) via-[#0e1215] via-70% to-neutral bg-linear-to-b transition-colors duration-500"
+        className="drawer-content flex flex-col h-full from-(--bg-color) via-[#0e1215] via-70% to-neutral bg-linear-to-b transition-colors duration-500"
       >
         <HomeHero onStartClick={handleHeroClick} />
 
