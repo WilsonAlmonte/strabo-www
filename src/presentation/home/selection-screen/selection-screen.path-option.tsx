@@ -24,20 +24,20 @@ export const SelectionScreenPathOption: React.FC<
       <div
         data-tip={optionTip}
         className={
-          "hover:ring-2 hover:ring-primary p-2 rounded-sm cursor-pointer tooltip-right tooltip tooltip-primary transition-colors " +
-          (selected ? "bg-(--char-color)/10" : "")
+          'hover:ring-primary tooltip-right tooltip tooltip-primary cursor-pointer rounded-sm p-2 transition-colors hover:ring-2 ' +
+          (selected ? 'bg-(--char-color)/10' : '')
         }
-        rel="button"
+        rel='button'
         onClick={onSelected}
       >
-        <p className="text-base-100 font-body font-bold text-xl">
+        <p className='text-base-100 font-body text-xl font-bold'>
           {order}. {label}
         </p>
         {content && (
-          <p className="text-base-100 font-body text-lg mt-2">{content}</p>
+          <p className='text-base-100 font-body mt-2 text-lg'>{content}</p>
         )}
       </div>
-      {showDivider && <div className="divider divider-primary"></div>}
+      {showDivider && <div className='divider divider-primary'></div>}
     </>
   );
 };

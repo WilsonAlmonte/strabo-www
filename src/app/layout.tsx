@@ -1,32 +1,32 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 import {
   Cinzel_Decorative,
   IM_Fell_English,
   EB_Garamond,
-} from "next/font/google";
-import "./globals.css";
+} from 'next/font/google';
+import './globals.css';
 
 const cinzelDecorative = Cinzel_Decorative({
-  variable: "--font-cinzel-decorative",
-  subsets: ["latin"],
-  weight: "700",
+  variable: '--font-cinzel-decorative',
+  subsets: ['latin'],
+  weight: '700',
 });
 
 const ebGaramond = EB_Garamond({
-  variable: "--font-eb-garamond",
-  subsets: ["latin"],
-  weight: ["400", "600"],
+  variable: '--font-eb-garamond',
+  subsets: ['latin'],
+  weight: ['400', '600'],
 });
 
 const imFellEnglish = IM_Fell_English({
-  variable: "--font-im-fell-english",
-  subsets: ["latin"],
-  weight: "400",
+  variable: '--font-im-fell-english',
+  subsets: ['latin'],
+  weight: '400',
 });
 
 export const metadata: Metadata = {
-  title: "Strabo",
-  description: "A game of creating your own adventure",
+  title: 'Strabo',
+  description: 'A game of creating your own adventure',
 };
 
 export default function RootLayout({
@@ -35,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full scroll-smooth">
+    <html lang='en' className='h-full scroll-smooth'>
       <body
         className={`${imFellEnglish.variable} ${cinzelDecorative.variable} ${ebGaramond.variable} h-full scroll-smooth`}
       >

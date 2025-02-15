@@ -23,9 +23,9 @@ export const Gameplay = () => {
   //   }))
   // );
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen container mx-auto">
-      <h1 className="text-6xl font-display">Gameplay in progress</h1>
-      <p className="mt-3">
+    <div className='container mx-auto flex min-h-screen flex-col items-center justify-center'>
+      <h1 className='font-display text-6xl'>Gameplay in progress</h1>
+      <p className='mt-3'>
         This is the gameplay screen. The user will be able to interact with the
         game here.
       </p>

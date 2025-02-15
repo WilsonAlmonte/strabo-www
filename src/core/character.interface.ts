@@ -1,4 +1,4 @@
-import { StoryPremise } from "./premise.interface";
+import { StoryPremise } from './premise.interface';
 
 export interface StoryCharacterData {
   id: string;

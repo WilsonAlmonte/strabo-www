@@ -1,10 +1,10 @@
-"use client";
-import { useGameFlowStore } from "@/store/game-flow.store";
-import { useShallow } from "zustand/react/shallow";
-import { CharacterSelectionWrapper } from "./character-selection-wrapper";
-import { CharacterSelectionCardGroup } from "./character-selection.card-group";
-import { AnimatePresence, motion } from "motion/react";
-import { CharacterSelectedGameDetails } from "./character-selected-game-details";
+'use client';
+import { useGameFlowStore } from '@/store/game-flow.store';
+import { useShallow } from 'zustand/react/shallow';
+import { CharacterSelectionWrapper } from './character-selection-wrapper';
+import { CharacterSelectionCardGroup } from './character-selection.card-group';
+import { AnimatePresence, motion } from 'motion/react';
+import { CharacterSelectedGameDetails } from './character-selected-game-details';
 
 export const CharacterSelection = () => {
   const {
@@ -37,16 +37,16 @@ export const CharacterSelection = () => {
 
   return (
     <CharacterSelectionWrapper>
-      <section className="my-30 container mx-auto z-50 height-auto">
-        <AnimatePresence mode="wait">
+      <section className='height-auto z-50 container mx-auto my-30'>
+        <AnimatePresence mode='wait'>
           {!selectedCharacter?.id && (
             <motion.div
-              key={"available-characters-10"}
+              key={'available-characters-10'}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               layout
-              className={"flex gap-10 justify-center flex-wrap"}
+              className={'flex flex-wrap justify-center gap-10'}
             >
               <CharacterSelectionCardGroup
                 avaliableCharacters={availableStoryCharacters}

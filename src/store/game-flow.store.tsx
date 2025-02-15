@@ -1,8 +1,8 @@
-import { StoryBranch } from "@/core/branch.interface";
-import { StoryCharacterData } from "@/core/character.interface";
-import { StoryPremise } from "@/core/premise.interface";
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { StoryBranch } from '@/core/branch.interface';
+import { StoryCharacterData } from '@/core/character.interface';
+import { StoryPremise } from '@/core/premise.interface';
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 type GameFlowActions = {
   setAvailableChoices: (choices: string[]) => void;
@@ -189,18 +189,18 @@ export const useGameFlowStore = create<
       set((state) => {
         ///fetch the outcome and choices for the next setup
         const response = {
-          id: "1",
-          choices: ["Go left", "Go right"],
-          setup: "You are in a forest.",
-          outcome: "You find a treasure chest.",
+          id: '1',
+          choices: ['Go left', 'Go right'],
+          setup: 'You are in a forest.',
+          outcome: 'You find a treasure chest.',
         };
         const storyBranch: StoryBranch = {
           id: response.id,
           setup: response.setup,
           choices: [...state.availableChoices],
-          outcome: "You find a treasure chest.",
+          outcome: 'You find a treasure chest.',
           lastBranchId:
-            state.storyTree[state.storyTree.length - 1]?.id || "guid-start",
+            state.storyTree[state.storyTree.length - 1]?.id || 'guid-start',
           depth: state.currentDepth,
         };
 
@@ -214,7 +214,7 @@ export const useGameFlowStore = create<
     },
     addStoryBranch: (branch) => {
       set((state) => {
-        console.log("addStoryBranch", branch);
+        console.log('addStoryBranch', branch);
         return {
           storyTree: [...state.storyTree, branch],
         };
@@ -224,7 +224,7 @@ export const useGameFlowStore = create<
       set(() => {
         return {
           gameIsOver: true,
-          finale: "You have reached the end of the story.",
+          finale: 'You have reached the end of the story.',
         };
       });
     },

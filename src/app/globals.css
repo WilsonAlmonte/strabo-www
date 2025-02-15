@@ -1,12 +1,14 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "daisyui" {
-  themes: strabo --prefersdark, strabo --default;
+  themes:
+    strabo --prefersdark,
+    strabo --default;
 }
 @plugin "daisyui/theme" {
-  name: "strabo";
+  name: 'strabo';
   default: true;
   prefersdark: true;
-  color-scheme: "light";
+  color-scheme: 'light';
   --color-base-100: #e9e3d8;
   --color-base-200: #d5c3ad;
   --color-base-300: #b8ac9b;
@@ -51,9 +53,9 @@
 }
 
 @theme {
-  --font-display: "Cinzel Decorative", "Cinzel Decorative Fallback";
-  --font-body: "IM Fell English", "IM Fell English Fallback";
-  --font-elements: "EB Garamond", "EB Garamond Fallback";
+  --font-display: 'Cinzel Decorative', 'Cinzel Decorative Fallback';
+  --font-body: 'IM Fell English', 'IM Fell English Fallback';
+  --font-elements: 'EB Garamond', 'EB Garamond Fallback';
 
   --text-xs: 0.9rem;
   --text-xs--line-height: calc(1 / 0.9);
@@ -125,9 +127,9 @@
 }
 
 .gradient-btn {
-  @apply text-xl bg-base-100/20 hover:text-primary-content backdrop-blur-sm hover:bg-gradient-to-bl hover:from-base-100 hover:to-primary transition-all text-base-200 font-elements;
+  @apply bg-base-100/20 hover:text-primary-content hover:from-base-100 hover:to-primary text-base-200 font-elements text-xl backdrop-blur-sm transition-all hover:bg-gradient-to-bl;
 }
 
 .str-btn {
-  @apply text-xl font-elements;
+  @apply font-elements text-xl;
 }
