@@ -1,11 +1,11 @@
-import { HomeLayout } from "@/components/ui/home.layout";
+import { HomeLayout } from '@/components/ui/home.layout';
 
 interface BaseLayout {
   children: React.ReactNode;
 }
 export default function Layout({ children }: BaseLayout) {
   return (
-    <section className="h-full flex flex-col">
+    <section className='flex h-full flex-col'>
       <HomeLayout>{children}</HomeLayout>
     </section>
   );

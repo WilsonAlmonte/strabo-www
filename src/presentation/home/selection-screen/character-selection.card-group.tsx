@@ -1,6 +1,6 @@
-import { motion } from "motion/react";
-import { CharacterCard } from "./character-card";
-import { StoryCharacterData } from "@/core/character.interface";
+import { motion } from 'motion/react';
+import { CharacterCard } from './character-card';
+import { StoryCharacterData } from '@/core/character.interface';
 
 interface CharacterSelectionCardGroupProps {
   avaliableCharacters: StoryCharacterData[];
