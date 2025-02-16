@@ -19,7 +19,7 @@ export const characters: StoryCharacterData[] = [
     premises: [
       {
         title: 'Echoes of the Fallen Star',
-        setting:
+        context:
           'A hidden valley beneath an eternal night sky, where ancient constellations whisper forgotten secrets.',
         premise:
           'Elara Moonwhisper discovers a fallen star pulsing with mysterious energy. As she reaches out, the star reveals visions of a lost civilization that once wielded cosmic power. But she is not the only one seeking its knowledge—others would claim it for themselves.',
@@ -31,7 +31,7 @@ export const characters: StoryCharacterData[] = [
       },
       {
         title: 'Shadows of the Celestial Veil',
-        setting:
+        context:
           'A hidden temple where the boundaries between worlds grow thin.',
         premise:
           'Elara Moonwhisper is drawn to a temple where the Celestial Veil—a barrier between the mortal realm and the heavens—grows dangerously weak. As she explores the temple, she uncovers a plot to tear down the Veil and unleash cosmic chaos upon the world.',
@@ -59,7 +59,7 @@ export const characters: StoryCharacterData[] = [
     premises: [
       {
         title: 'The Rootbound Pact',
-        setting:
+        context:
           'An ancient, enchanted forest where the trees whisper, and the ground breathes with hidden life.',
         premise:
           'Thorne Bramblefoot is drawn to a dying section of the forest where something unnatural is spreading. The spirit of the woods offers him a terrible choice—bind himself to the land forever to stop the decay or watch the forest he once protected wither away.',
@@ -71,7 +71,7 @@ export const characters: StoryCharacterData[] = [
       },
       {
         title: 'Shadows of the Wild Hunt',
-        setting:
+        context:
           'A moonlit glade where the spirits of the forest gather to mourn the passing of the old ways.',
         premise:
           'Thorne Bramblefoot is hunted by the Wild Hunt, a spectral army that seeks to claim his soul for the forest’s ancient debt. To escape their grasp, he must find the heart of the forest and offer a sacrifice that will break the curse binding him to the land.',
@@ -99,7 +99,7 @@ export const characters: StoryCharacterData[] = [
     premises: [
       {
         title: 'A Song of Forgotten Kings',
-        setting:
+        context:
           'A ruined city where echoes of ancient ballads still hum through the broken streets.',
         premise:
           'Lyric Evergold stumbles upon a lost melody hidden in the ruins of a long-fallen kingdom. Legends say it was a song so powerful it could awaken the dead—or rewrite fate itself. As Lyric hums the first notes, the ruins stir to life.',
@@ -111,7 +111,7 @@ export const characters: StoryCharacterData[] = [
       },
       {
         title: "The Bard's Gambit",
-        setting:
+        context:
           'A bustling tavern where laughter and music fill the air, hiding darker secrets beneath the revelry.',
         premise:
           'Lyric Evergold is challenged to a musical duel by a rival bard who seeks to steal their voice. The stakes are high—the loser will be silenced forever. But as the duel begins, Lyric realizes their opponent is using forbidden magic to cheat.',
@@ -139,7 +139,7 @@ export const characters: StoryCharacterData[] = [
     premises: [
       {
         title: 'The Last Vow',
-        setting:
+        context:
           'A war-torn kingdom where the banners of fallen lords still hang in the wind.',
         premise:
           'Lord Vexen Blackthorn receives word that the last survivor of the order that betrayed him still lives. With his cursed blade whispering for vengeance, he prepares for the final hunt—but a dying knight warns him that killing the traitor may seal his own doom.',
@@ -151,7 +151,7 @@ export const characters: StoryCharacterData[] = [
       },
       {
         title: 'Shadows of the Fallen',
-        setting:
+        context:
           'A cursed battlefield where the spirits of the fallen linger, trapped in an endless cycle of war.',
         premise:
           'Lord Vexen Blackthorn is haunted by the ghosts of those he has slain, their whispers driving him to the brink of madness. To free himself from their torment, he must confront the dark sorcerer who bound their souls to the battlefield.',
@@ -179,7 +179,7 @@ export const characters: StoryCharacterData[] = [
     premises: [
       {
         title: 'The Twilight Accord',
-        setting: 'A forgotten tower where time bends, and reality fractures.',
+        context: 'A forgotten tower where time bends, and reality fractures.',
         premise:
           'Sylvaine Duskbinder is summoned by a secret cabal of mages who seek to rewrite history. They offer Sylvaine a seat among them, but the price is steep—the past must be unraveled to ensure the future they desire.',
         choices: [
@@ -190,7 +190,7 @@ export const characters: StoryCharacterData[] = [
       },
       {
         title: 'Shadows of the Eclipse',
-        setting:
+        context:
           'A city cloaked in darkness where the sun never rises and the moon is a pale memory.',
         premise:
           'Sylvaine Duskbinder is drawn to the city by whispers of an ancient eclipse that once plunged the world into shadow. As they unravel the mystery, they discover a cult that seeks to recreate the eclipse and bring about a new age of darkness.',
@@ -218,7 +218,7 @@ export const characters: StoryCharacterData[] = [
     premises: [
       {
         title: 'The Hollow Oath',
-        setting: 'A remote border town on the edge of a war-torn kingdom.',
+        context: 'A remote border town on the edge of a war-torn kingdom.',
         premise:
           "Garrick 'The Hollow Fang' is hired to track down a deserter carrying a dangerous secret. As he closes in, he realizes he isn’t the only one after the target—someone from his past is hunting them as well.",
         choices: [
@@ -229,7 +229,7 @@ export const characters: StoryCharacterData[] = [
       },
       {
         title: 'Shadows of the Past',
-        setting:
+        context:
           'A ruined fortress where echoes of ancient battles still linger in the air.',
         premise:
           "Garrick 'The Hollow Fang' is hired to retrieve a lost artifact hidden within the fortress. But as he delves into the ruins, he uncovers a dark secret from his own past—one that could change the course of his future.",

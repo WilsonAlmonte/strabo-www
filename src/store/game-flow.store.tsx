@@ -1,6 +1,7 @@
 import { StoryBranch } from '@/core/branch.interface';
 import { StoryCharacterData } from '@/core/character.interface';
 import { StoryPremise } from '@/core/premise.interface';
+import { generatePath } from '@/services/generate-path';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
@@ -71,6 +72,10 @@ type GameFlowState = {
  */
 type GameState = {
   /**
+   * Indicates whether an error has occurred.
+   */
+  error: boolean;
+  /**
    * Indicates whether the game is loading.
    */
   loading: boolean;
@@ -133,7 +138,7 @@ const initialState = {
   currentDepth: 0,
   storyTree: [],
   finale: null,
-  maxDepth: 8,
+  maxDepth: 4,
   loading: false,
   gameIsOver: false,
 };
@@ -141,7 +146,7 @@ const initialState = {
 export const useGameFlowStore = create<
   GameState & GameFlowActions & GameFlowState
 >()(
-  devtools((set) => ({
+  devtools((set, get) => ({
     ...initialState,
     startStory: (characterId) => {
       set((state) => {
@@ -184,37 +189,51 @@ export const useGameFlowStore = create<
         };
       });
     },
-    fetchNextStoryBranch: () => {
-      //Fetch the next setup in the story tree
-      set((state) => {
-        ///fetch the outcome and choices for the next setup
-        const response = {
-          id: '1',
-          choices: ['Go left', 'Go right'],
-          setup: 'You are in a forest.',
-          outcome: 'You find a treasure chest.',
-        };
-        const storyBranch: StoryBranch = {
-          id: response.id,
-          setup: response.setup,
-          choices: [...state.availableChoices],
-          outcome: 'You find a treasure chest.',
-          lastBranchId:
-            state.storyTree[state.storyTree.length - 1]?.id || 'guid-start',
-          depth: state.currentDepth,
-        };
-
-        return {
-          storyTree: [...state.storyTree, storyBranch],
-          currentDepth: state.currentDepth + 1,
-          selectedSetup: null,
-          availableChoices: storyBranch.choices,
-        };
-      });
+    fetchNextStoryBranch: async () => {
+      set({ loading: true });
+      const isFinale = get().maxDepth === get().currentDepth;
+      try {
+        const response = await generatePath(
+          get().selectedSetup || '',
+          get().selectedPremise?.premise || '',
+          get().storyTree[get().storyTree.length - 1]?.outcome ||
+            'Same as premise',
+          get().selectedPremise?.context || '',
+          get().selectedCharacter as StoryCharacterData,
+          isFinale,
+          get().maxDepth === get().currentDepth + 1
+        );
+        set((state) => {
+          ///fetch the outcome and choices for the next setup
+          const storyBranch: StoryBranch = {
+            id: response.id,
+            setup: response.setup,
+            choices: [...state.availableChoices],
+            outcome: response.outcome,
+            lastBranchId:
+              state.storyTree[state.storyTree.length - 1]?.id || 'guid-start',
+            depth: state.currentDepth,
+          };
+          return {
+            storyTree: [...state.storyTree, storyBranch],
+            currentDepth: state.currentDepth + 1,
+            selectedSetup: null,
+            availableChoices: isFinale ? [] : response.choices,
+            finale: isFinale ? response.outcome : null,
+            gameIsOver: response.isFinale,
+            loading: false,
+          };
+        });
+      } catch {
+        set({ loading: false });
+        set({ error: true });
+        setTimeout(() => {
+          set({ error: false });
+        }, 2000);
+      }
     },
     addStoryBranch: (branch) => {
       set((state) => {
-        console.log('addStoryBranch', branch);
         return {
           storyTree: [...state.storyTree, branch],
         };

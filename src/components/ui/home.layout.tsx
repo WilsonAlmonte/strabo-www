@@ -4,6 +4,7 @@ import { characters } from '@/data/characters.fixture';
 import { HomeHero } from '@/presentation/home/home.hero';
 import { useRouter } from 'next/navigation';
 import { useShallow } from 'zustand/shallow';
+import { motion } from 'motion/react';
 
 interface HomeLayoutProps {
   children: React.ReactNode;
@@ -15,11 +16,13 @@ export const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
     selectedCharacter,
     setAvailableStoryCharacters,
     availableStoryCharacters,
+    error,
   } = useGameFlowStore(
     useShallow((state) => ({
       selectedCharacter: state.selectedCharacter,
       setAvailableStoryCharacters: state.setAvailableStoryCharacters,
       availableStoryCharacters: state.availableStoryCharacters,
+      error: state.error,
     }))
   );
 
@@ -31,7 +34,7 @@ export const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
 
   return (
     <div className='relative flex-1'>
-      <div className='absolute h-full w-full opacity-15'>
+      <div className='absolute z-50 h-full w-full opacity-15'>
         <video autoPlay loop muted className='h-full w-full object-fill'>
           <source src='/bg-video.mp4' type='video/mp4' />
         </video>
@@ -60,6 +63,15 @@ export const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
           {/* Page content here */}
           <div className=''>{children}</div>
         </main>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: error ? 1 : 0 }}
+          className='toast toast-top toast-center z-50'
+        >
+          <div className='alert alert-error'>
+            <span>An error occurred while fetching the next story branch</span>
+          </div>
+        </motion.div>
       </div>
     </div>
   );

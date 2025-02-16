@@ -15,6 +15,7 @@ export const CharacterSelection = () => {
     selectPremise,
     selectedPremise,
     onInitialChoice,
+    isLoading,
     selectedSetup,
     confirmChoice,
   } = useGameFlowStore(
@@ -28,6 +29,7 @@ export const CharacterSelection = () => {
       onInitialChoice: state.setSelectedSetup,
       selectedSetup: state.selectedSetup,
       confirmChoice: state.fetchNextStoryBranch,
+      isLoading: state.loading,
     }))
   );
 
@@ -68,6 +70,7 @@ export const CharacterSelection = () => {
             >
               <CharacterSelectedGameDetails
                 resetGame={resetGame}
+                isLoading={isLoading}
                 confirmChoice={confirmChoice}
                 selectedPremise={selectedPremise}
                 selectedSetup={selectedSetup}

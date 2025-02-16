@@ -30,7 +30,7 @@ export const HomeHero = ({ onStartClick }: { onStartClick: () => void }) => {
   };
   return (
     <div
-      className='hero relative flex min-h-screen flex-col overflow-x-hidden transition-all duration-500'
+      className='hero relative z-50 flex min-h-screen flex-col overflow-x-hidden transition-all duration-500'
       style={{
         maskImage:
           'linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 80%, transparent 100%)',

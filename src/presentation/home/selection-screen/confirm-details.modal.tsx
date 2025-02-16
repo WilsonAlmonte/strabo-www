@@ -37,7 +37,7 @@ export const ConfirmDetailsModal: React.FC<ConfirmDetailsModalProps> = ({
               <MapPinnedIcon size={18} />
               <p className='font-elements text-xl'>Where?</p>
             </div>
-            <p>{selectedPremise?.setting}</p>
+            <p>{selectedPremise?.context}</p>
           </div>
           <div className='flex flex-col text-lg'>
             <div className='text-primary flex items-center gap-1'>
