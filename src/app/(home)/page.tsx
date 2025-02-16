@@ -75,7 +75,7 @@ export default function Home() {
           <Gameplay />
         </motion.div>
       )}
-      <div className='group fixed right-2 bottom-1 flex h-24 w-24 items-end justify-end p-2'>
+      <div className='group fixed right-2 bottom-1 z-100 flex h-24 w-24 items-end justify-end p-2'>
         <button
           className='btn btn-circle btn-primary'
           onClick={() => changeSoundMode(!soundOn)}

@@ -107,7 +107,7 @@
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-base-100) var(--color-base-200);
+  scrollbar-color: var(--color-base-100) transparent;
 }
 
 /* Chrome, Edge, and Safari */

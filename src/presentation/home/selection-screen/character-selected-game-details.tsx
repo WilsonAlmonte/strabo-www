@@ -7,6 +7,7 @@ import { motion } from 'motion/react';
 import { useEffect, useRef } from 'react';
 import { ConfirmDetailsModal } from './confirm-details.modal';
 import { SelectionScreenPathOption } from './selection-screen.path-option';
+import { LoadingModal } from '../gameplay-screen/loading.modal';
 interface CharacterSelectedGameDetailsProps {
   selectedCharacter: StoryCharacterData;
   onPremiseSelected: (premise: StoryPremise) => void;
@@ -15,6 +16,7 @@ interface CharacterSelectedGameDetailsProps {
   confirmChoice: () => void;
   resetGame: () => void;
   selectedSetup: string | null;
+  isLoading: boolean;
 }
 export const CharacterSelectedGameDetails: React.FC<
   CharacterSelectedGameDetailsProps
@@ -26,9 +28,21 @@ export const CharacterSelectedGameDetails: React.FC<
   selectedSetup,
   confirmChoice,
   resetGame,
+  isLoading,
 }) => {
   const characterCardRef = useRef<CardAnimationTriggers>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
+
+  const loadingDialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    if (!loadingDialogRef.current) return;
+    if (isLoading) {
+      loadingDialogRef.current.showModal();
+    } else {
+      loadingDialogRef.current.close();
+    }
+  }, [isLoading]);
   useEffect(() => {
     if (!!selectedSetup) {
       dialogRef.current?.showModal();
@@ -123,6 +137,7 @@ export const CharacterSelectedGameDetails: React.FC<
           selectedCharacterName={selectedCharacter.full_name}
           selectedSetup={selectedSetup}
         />
+        <LoadingModal dialogRef={loadingDialogRef} />
       </div>
     </>
   );
