@@ -23,7 +23,7 @@ Strabo-www is a Next.js project designed as a game to generate stories based on 
 To install the project dependencies, run:
 
 ```bash
-npm install
+bun install
 ```
 
 ## Usage
@@ -31,25 +31,25 @@ npm install
 To start the development server, use:
 
 ```bash
-npm run dev
+bun run dev
 ```
 
 To build the project, use:
 
 ```bash
-npm run build
+bun run build
 ```
 
 To start the production server, use:
 
 ```bash
-npm run start
+bun run start
 ```
 
 To lint the project, use:
 
 ```bash
-npm run lint
+bun run lint
 ```
 
 ## Scripts
