@@ -1,6 +1,6 @@
 'use server';
 import { StoryCharacterData } from '@/core/character.interface';
-import OpenAI from 'openai';
+import { GoogleGenAI, Type } from '@google/genai';
 import { v4 as uuidv4 } from 'uuid';
 
 type StoryResponse = {
@@ -11,6 +11,8 @@ type StoryResponse = {
   isFinale?: boolean;
 };
 
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+
 export const generatePath = async (
   setup: string,
   premise: string,
@@ -20,16 +22,6 @@ export const generatePath = async (
   nextIsFinale: boolean,
   isFinale: boolean
 ): Promise<StoryResponse> => {
-  const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-    organization: process.env.OPENAI_ORG_ID,
-    project: process.env.OPENAI_PROJECT_ID,
-  });
-
-  console.log(process.env.OPENAI_API_KEY);
-  console.log(process.env.OPENAI_ORG_ID);
-  console.log(process.env.OPENAI_PROJECT_ID);
-
   const prompt = getPrompt(
     selectedCharacter,
     context,
@@ -41,20 +33,30 @@ export const generatePath = async (
   );
 
   try {
-    const response = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
-      messages: [{ role: 'user', content: prompt }],
-      max_completion_tokens: isFinale ? 1000 : 500,
-      temperature: 0.7,
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: prompt,
+      config: {
+        temperature: 0.7,
+        maxOutputTokens: isFinale ? 1000 : 500,
+        thinkingConfig: { thinkingBudget: 0 },
+        responseMimeType: 'application/json',
+        responseSchema: {
+          type: Type.OBJECT,
+          properties: {
+            outcome: { type: Type.STRING },
+            choices: { type: Type.ARRAY, items: { type: Type.STRING } },
+          },
+          required: isFinale ? ['outcome'] : ['outcome', 'choices'],
+        },
+      },
     });
-    const aiResponse = parseJsonString(
-      response.choices[0].message.content || '{}'
-    );
+    const aiResponse = parseJsonString(response.text || '{}');
     return {
       id: uuidv4(),
       setup: setup,
       outcome: aiResponse.outcome,
-      choices: aiResponse.choices,
+      choices: aiResponse.choices ?? [],
       isFinale: isFinale,
     };
   } catch (error) {
@@ -64,7 +66,6 @@ export const generatePath = async (
 };
 
 const parseJsonString = (jsonString: string) => {
-  console.log('JSON String:', jsonString);
   const jsonStart = jsonString.indexOf('{');
   const jsonEnd = jsonString.lastIndexOf('}') + 1;
   const jsonContent = jsonString.slice(jsonStart, jsonEnd);
@@ -99,7 +100,7 @@ ${context}
 
 ${
   isFinale
-    ? '**This is the final chapter. Conclude the story with a satisfying and meaningful ending.**'
+    ? '**This is the final chapter. Conclude the story with a satisfying and meaningful ending in the `outcome` field.**'
     : `**Next Steps**:
 1. Continue the story logically based on the last choice.
 2. Incorporate a **storytelling version** of the last choice into the new outcome.
@@ -107,13 +108,5 @@ ${
    ${nextIsFinale ? '**Ensure all choices lead towards an ending.**' : ''}
 `
 }
-
-### Response Format (JSON)
-\`\`\`json
-{
-  "outcome": "...",
-  ${isFinale ? '' : '"choices": ["...", "..."]'}
-}
-\`\`\`
 `.trim();
 };
